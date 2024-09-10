@@ -1,35 +1,31 @@
+const fs = require("fs")
+
 const arreglo = [2,10,"a",4,"b",6,"d",true,"e",9,1,"z",12,"r", "c", false]
-let condicion = "string"
+let condicion = "number"
 
 function crearArreglo(x, y) {
-    let nuevoArreglo = []
-    for (let i = 0; i < x.length; i++){
-        if (typeof(x[i]) === y){
-            
-            nuevoArreglo.push(x[i]);
-        }
-        
-    }
+    if (y === "string"  || y === "number"  || y === "boolean"  || y === "bigint"){
+    let nuevoArreglo = x.filter((e) => typeof(e) === y)
+    nuevoArreglo = nuevoArreglo.sort(function(a, b){return a - b});
+    nuevoArreglo = [...new Set(nuevoArreglo)]
     return nuevoArreglo;
 }
-
-function ordenarArreglo(x) {
-    let nuevoArreglo = []
-    for (let i = 0; i < x.length; i++){
-        if (typeof(x[i]) === y){
-            
-            nuevoArreglo.push(x[i]);
-        }
+    else{
+        throw new Error()
         
-    }
-    return nuevoArreglo;
+    }}
+
+
+try{
+    const nuevo = crearArreglo(arreglo, condicion)
+    const file = fs.writeFileSync("doc.txt", nuevo.toString())
+
+ }
+catch (e) {
+    console.log("Error!")
 }
 
-const nuevo = crearArreglo(arreglo, condicion).sort(function(a, b){return a - b})
 
 
-for (let i = 0; i < nuevo.length; i++){
+
     
-    console.log(nuevo[i])    
-    
-}
